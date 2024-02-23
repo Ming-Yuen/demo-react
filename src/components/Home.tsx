@@ -6,8 +6,7 @@ function Home() {
 
   return (
     <div>
-      <h1>{t('greeting')}</h1>
-      <p>{t('farewell')}</p>
+      
     </div>
   );
 }
