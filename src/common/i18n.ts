@@ -3,9 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 
-import enTranslation from '../locales/en/translation.json';
-import zhHKTranslation from '../locales/zhHK/translation.json';
-import zhCNTranslation from '../locales/zhCN/translation.json';
+import en from '../locales/en.json';
+import zh from '../locales/zh.json';
 
 // Add translations to i18next
 i18n
@@ -15,18 +14,15 @@ i18n
   .init({
     resources: {
       en: {
-        translation: enTranslation,
+        translation: en,
       },
       zhHK: {
-        translation: zhHKTranslation,
-      },
-      zhCN: {
-        translation: zhCNTranslation,
+        translation: zh,
       },
     },
     fallbackLng: 'en', // Fallback language if translation isn't available
     debug: true, // Enable debug output
-    supportedLngs: ['en', 'zhCN', 'zhHK'],
+    supportedLngs: ['en', 'zhHK'],
     interpolation: {
       escapeValue: false, // React handles escaping
     },
