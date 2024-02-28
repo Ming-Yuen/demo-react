@@ -9,28 +9,53 @@ const LanguageSelector: React.FC = () => {
   };
 
   return (
-    <div className="row align-items-end">
-      <div className="col">
-        <div className="dropdown d-inline-block">
-          <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Language
-          </button>
-          <ul className="dropdown-menu">
-            <li><div className="dropdown-item" onClick={() => changeLanguage('en')}>English</div></li>
-            <li><div className="dropdown-item" onClick={() => changeLanguage('zhHK')}>中文繁體</div></li>
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="col-1">
+          <a className="navbar-brand" href="#">{t('projectName')}</a>
+        </div>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarScroll">
+          <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ "--bs-scroll-height": "100px" } as any}>
+            {/* <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="#">Home</a>
+            </li> */}
+            <li className="nav-item">
+              <a className="nav-link" href="#">Link1</a>
+            </li>
+            {/* <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Link2
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><a className="dropdown-item" href="#">Action</a></li>
+                <li><a className="dropdown-item" href="#">Another action</a></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><a className="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li> */}
           </ul>
-        </div>
-      <div className="col">
-          <nav className="navbar bg-body-tertiary">
-            <div className="container-fluid">
-              <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                <button className="btn btn-outline-success text-nowrap" type="submit">{t('search')}</button>
-              </form>
+
+          <div className="col-1">
+            <div className="dropdown">
+              <button className="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                Language
+              </button>
+              <ul className="dropdown-menu">
+                <li><div className="dropdown-item" onClick={() => changeLanguage('en')}>English</div></li>
+                <li><div className="dropdown-item" onClick={() => changeLanguage('zhHK')}>中文繁體</div></li>
+              </ul>
             </div>
-          </nav>
-        </div>
-      </div>
+          </div>
+          <div className="col-2">
+            <form className="d-flex">
+              <input className="form-control me-2" type="search" placeholder={t('search')} aria-label="Search" />
+              <button className="btn btn-outline-secondary text-nowrap" type="submit">{t('search')}</button>
+            </form>
+          </div></div>
+      </nav>
     </div>
   );
 };

@@ -1,0 +1,11 @@
+.custom-dropdown {
+    background-color: transparent !important;
+    color: black;    
+}
+.custom-dropdown:hover {
+    color: white !important;
+    background-color: #6c757d !important;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
