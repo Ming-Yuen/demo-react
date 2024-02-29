@@ -11,8 +11,10 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 function App() {
   return (
     <I18nextProvider i18n={i18n}>
-      <Navigation />
-      <Home />
+      <div className="container-fluid">
+        <Navigation />
+        <Home />
+      </div>
     </I18nextProvider>
   );
 }

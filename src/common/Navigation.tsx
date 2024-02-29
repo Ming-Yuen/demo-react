@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { api } from './api';
 
 const LanguageSelector: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -7,6 +8,15 @@ const LanguageSelector: React.FC = () => {
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
   };
+
+  const loadMenu = async()=>{
+    const menuUrl = process.env.REACT_APP_BE;
+    await api({
+      endpointUrl: menuUrl,
+      timeout: 500
+    })
+  }
+  
 
   return (
     <div>
