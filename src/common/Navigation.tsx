@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { api } from './api';
+import { httpPost, ApiConfig } from './api';
 
 const LanguageSelector: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -9,14 +9,30 @@ const LanguageSelector: React.FC = () => {
     i18n.changeLanguage(language);
   };
 
-  const loadMenu = async()=>{
-    const menuUrl = process.env.REACT_APP_BE;
-    await api({
-      endpointUrl: menuUrl,
-      timeout: 500
-    })
+  useEffect(() => {
+    loadMenu();
+  });
+
+  const loadMenu = async () => {
+    const config: ApiConfig = {
+      endpointUrl: process.env.REACT_APP_MENU_QUERY!,
+      timeout: 5000,
+    };
+    await httpPost(config)
+      .then((response) => {
+
+      })
+      .catch((error) => {
+        if (error.response) {
+          if (error.response.status === 404) {
+
+          } else if (error.response.status === 500) {
+
+          }
+        }
+      });
   }
-  
+
 
   return (
     <div>
