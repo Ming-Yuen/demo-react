@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import axios, { AxiosResponse } from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { httpPost, ApiConfig } from './api';
+import { MenuItem, MenuQueryResponse } from '../api/MenuQueryResponse';
+import Login from '../components/SignIn';
+import { httpGet, ApiConfig } from './api';
 
 const LanguageSelector: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -9,30 +12,44 @@ const LanguageSelector: React.FC = () => {
     i18n.changeLanguage(language);
   };
 
+  let initialRender = false;
+  const [data, setData] = useState<MenuItem[]>([]);
   useEffect(() => {
-    loadMenu();
-  });
+    if (!initialRender) {
+      LoadMenu();
+    }
 
-  const loadMenu = async () => {
+    return () => {
+      initialRender = true;
+    };
+  }, []);
+
+  async function LoadMenu() {
     const config: ApiConfig = {
-      endpointUrl: process.env.REACT_APP_MENU_QUERY!,
+      endpointUrl: process.env.REACT_APP_MENU_DEFAULT_QUERY!,
       timeout: 5000,
     };
-    await httpPost(config)
-      .then((response) => {
-
-      })
-      .catch((error) => {
-        if (error.response) {
-          if (error.response.status === 404) {
-
-          } else if (error.response.status === 500) {
-
-          }
-        }
-      });
+    try {
+      const response = await httpGet(config);
+      console.log(response!.data.menu);
+      setData(response!.data.menu);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
+  function renderMenuItems() {
+    return data.map((item: MenuItem, index) => {
+      if (item.child === null) {
+        return (
+          <li className="nav-item" key={index}>
+            <a className="nav-link" href={item.link}>{item.name}</a>
+          </li>
+        );
+      }
+      return null;
+    });
+  }
 
   return (
     <div>
@@ -45,23 +62,7 @@ const LanguageSelector: React.FC = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarScroll">
           <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ "--bs-scroll-height": "100px" } as any}>
-            {/* <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">Home</a>
-            </li> */}
-            <li className="nav-item">
-              <a className="nav-link" href="#">Link1</a>
-            </li>
-            {/* <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Link2
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a className="dropdown-item" href="#">Action</a></li>
-                <li><a className="dropdown-item" href="#">Another action</a></li>
-                <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li> */}
+            {renderMenuItems()}
           </ul>
 
           <div className="col-1">
@@ -80,9 +81,11 @@ const LanguageSelector: React.FC = () => {
               <input className="form-control me-2" type="search" placeholder={t('search')} aria-label="Search" />
               <button className="btn btn-outline-secondary text-nowrap" type="submit">{t('search')}</button>
             </form>
-          </div></div>
+          </div>
+        </div>
       </nav>
     </div>
   );
 };
+
 export default LanguageSelector;
