@@ -1,9 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MenuItem, MenuQueryResponse } from '../api/MenuQueryResponse';
-import Login from '../components/SignIn';
-import { httpGet, ApiConfig } from './api';
+import { MenuItem } from '../services/MenuQueryResponse';
+import { httpGet } from './api';
 
 const LanguageSelector: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -25,12 +23,8 @@ const LanguageSelector: React.FC = () => {
   }, []);
 
   async function LoadMenu() {
-    const config: ApiConfig = {
-      endpointUrl: process.env.REACT_APP_MENU_DEFAULT_QUERY!,
-      timeout: 5000,
-    };
     try {
-      const response = await httpGet(config);
+      const response = await httpGet(process.env.REACT_APP_MENU_DEFAULT_QUERY!);
       console.log(response!.data.menu);
       setData(response!.data.menu);
     } catch (error) {
