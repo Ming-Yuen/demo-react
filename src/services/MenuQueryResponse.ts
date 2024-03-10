@@ -8,7 +8,7 @@ export interface MenuQueryResponse {
 export interface MenuItem {
     parent: null | MenuItem;
     icon: null | string;
-    name: string;
+    title: string;
     type: string;
     link: string;
     roleId: number;

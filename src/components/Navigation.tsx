@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MenuItem } from '../services/MenuQueryResponse';
-import { httpGet } from './api';
+import { httpGet } from '../common/api';
+import { Link} from 'react-router-dom';
 
 const LanguageSelector: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -35,13 +36,23 @@ const LanguageSelector: React.FC = () => {
   function renderMenuItems() {
     return data.map((item: MenuItem, index) => {
       if (item.child === null) {
+        return <li className="nav-item" key={index}>
+          <Link to={item.link} className="nav-link">{t(item.title)}</Link>
+        </li>
+      } else {
         return (
-          <li className="nav-item" key={index}>
-            <a className="nav-link" href={item.link}>{item.name}</a>
+          <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {t(item.title)}
+            </a>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              {item.child.map((childItem: MenuItem, childIndex) => {
+                return (<li><Link className="dropdown-item" to={childItem.link}>{t(childItem.title)}</Link></li>);
+              })}
+            </ul>
           </li>
         );
       }
-      return null;
     });
   }
 

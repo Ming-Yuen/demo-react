@@ -1,4 +1,11 @@
 {
   "projectName":"project",
-  "search": "搜尋"
+  "search": "搜尋",
+  "Account trading":"账号交易",
+  "Item trading":"道具交易",
+  "Pet trading":"宠物交易",
+  "upload":"上传",
+  "account upload":"账号上传",
+  "item upload":"道具上传",
+  "pet upload":"宠物上传"
 }

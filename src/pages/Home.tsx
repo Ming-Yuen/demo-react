@@ -1,7 +1,7 @@
 import React from 'react';
 // import { useTranslation } from 'react-i18next';
 
-function Home() {
+export default function Home() {
   // const { t } = useTranslation();
 
   return (
@@ -10,5 +10,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;
