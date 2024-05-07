@@ -19,12 +19,15 @@ function App() {
   return (
     <I18nextProvider i18n={i18n}>
       <BrowserRouter>
-        <div className="container-fluid">
+        <div className="container-fluid ">
           <div className='row'>
-            <div className='col-12'>
-              <Navigation />
-            </div>
-            <Routes>
+            <Navigation />
+          </div>
+            <Upload />
+        </div>
+
+        
+        <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/accountTrade" element={<AccountTrade />} />
 
@@ -40,8 +43,6 @@ function App() {
 
               <Route path="/login" element={<Login />} />
             </Routes>
-          </div>
-        </div>
       </BrowserRouter>
     </I18nextProvider>
   );
