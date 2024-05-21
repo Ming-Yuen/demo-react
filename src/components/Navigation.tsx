@@ -70,7 +70,7 @@ const LanguageSelector: React.FC = () => {
             {renderMenuItems()}
           </ul>
 
-          <div className="col-1">
+          <div className="col-sm-2">
             <div className="dropdown">
               <button className="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false" >
                 Language
@@ -81,7 +81,7 @@ const LanguageSelector: React.FC = () => {
               </ul>
             </div>
           </div>
-          <div className="col-2">
+          <div className="col-12 col-sm-3">
             <form className="d-flex">
               <input className="form-control me-2" type="search" placeholder={t('search')} aria-label="Search" />
               <button className="btn btn-outline-secondary text-nowrap" type="submit">{t('search')}</button>

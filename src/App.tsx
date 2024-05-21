@@ -19,7 +19,7 @@ function App() {
   return (
     <I18nextProvider i18n={i18n}>
       <BrowserRouter>
-        <div className="container-fluid ">
+        <div className="container-fluid">
           <div className='row'>
             <Navigation />
           </div>
