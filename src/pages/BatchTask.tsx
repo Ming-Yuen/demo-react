@@ -16,7 +16,7 @@ export default function BatchTask() {
   }, []);
   async function onLoad() {
     try {
-      const response = await httpPost(process.env.REACT_APP_MENU_DEFAULT_QUERY!);
+      const response = await httpPost(process.env.REACT_APP_MENU_BATCH_TASK_QUERY!, null, null);
       console.log(response!.data.menu);
       setInitialData(response!.data.menu);
     } catch (error) {
