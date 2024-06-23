@@ -6,9 +6,10 @@ export interface MenuQueryResponse {
 
 }
 export interface MenuItem {
+    id: string;
     parent: null | MenuItem;
     icon: null | string;
-    title: string;
+    name: string;
     type: string;
     link: string;
     roleId: number;
